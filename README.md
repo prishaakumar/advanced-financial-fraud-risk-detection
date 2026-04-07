@@ -1,52 +1,81 @@
-# SecurePay: AI-Protected Payments (Standalone)
+# Advanced Model Financial Fraud Detection (GuardianPay)
 
-SecurePay (formerly Guardian Pay) is a modern, real-time transaction monitoring and fraud detection platform. This version is a standalone frontend application that simulates a production-ready financial experience with built-in AI behavior logic.
+![GuardianPay Dashboard](file:///C:/Users/Prisha/.gemini/antigravity/brain/76997403-fbc6-45ad-aec2-a44b360cbcfb/.system_generated/click_feedback/click_feedback_1775587863329.png)
+
+## 📋 Abstract
+As the volume of digital transactions (UPI) grows, traditional rule-based fraud detection systems struggle to keep up with complex, evolving patterns. **Advanced Model Financial Fraud Detection** is a real-time system that leverages **Graph Neural Networks (GNN)** and **Behavioral AI** to identify fraudulent activities with a target accuracy of 94%. By modeling transactions as a dynamic graph, the system captures non-linear relationships and network-level anomalies that traditional models miss.
 
 ## 🌟 Key Features
+- **Real-Time GNN Inference**: Uses Graph Convolutional Networks (GCN) to analyze spatial transaction patterns.
+- **Dual-Signal Ensemble**: Combines deep learning probability with statistical behavioral Z-scores (IQR analysis).
+- **Explainable AI (XAI)**: Integrated SHAP-style charts and `GNNExplainer` to provide human-readable reasons for every risk flag.
+- **Personalized Risk Thresholds**: Adaptive logic that learns individual user spending habits (e.g., User A vs User B).
+- **Premium UI/UX**: Responsive dashboard built with React and Framer Motion for a modern financial experience.
+- **Adaptive Security**:
+    - **Safe**: Auto-approved transactions.
+    - **Risky**: Triggers OTP (One-Time Password) verification.
+    - **Fraudulent**: Instant blocking of suspicious attempts.
 
-* **Real-Time Fraud Simulation:** Instant analysis of transactions using localized behavioral scoring logic.
-* **Dual-Algorithm Simulation:** Emulates both behavioral heuristics and network risk patterns directly in the browser.
-* **Personalized Scoring:** Simulates distinct user profiles (User A vs. User B) with unique statistical spending habits.
-* **Explainable AI (SHAP) Visuals:** Provides visual breakdowns of why a transaction might be flagged as risky.
-* **Modern UI/UX:** Built with React, Tailwind CSS, and Framer Motion for a premium, responsive experience.
+## 🏗️ Technical Architecture
 
-## 🏗️ Project Structure
+### Backend (The Brain)
+- **Engine**: Flask (Python)
+- **Deep Learning**: PyTorch & PyTorch Geometric
+- **Logic**: 
+    - **Graph Construction**: Maps users and transactions into a relational network.
+    - **Anomaly Detection**: Real-time statistical analysis of transaction spikes.
 
-The project follows a scalable, feature-based organization:
-
-```text
-src/
-├── api/                # Mocked AI Inference Engine
-├── context/            # Global Transaction State
-├── features/           # Feature-based logic
-│   ├── monitoring/     # Fraud Monitor Dashboard
-│   └── payment/        # Payment Portal & Risk Components
-├── layouts/            # Common Layout Components (Navigation)
-├── types/              # Centralized TypeScript Definitions
-└── pages/              # Root-level Route Components
-```
+### Frontend (The Dashboard)
+- **Framework**: React 18 with Vite
+- **Styling**: Vanilla CSS with Tailwind tokens
+- **Visuals**: Chart.js for SHAP explanations and custom SVG for Spike Graphs.
 
 ## 🚀 Getting Started
 
-### Installation
+### Prerequisites
+- Python 3.8+
+- Node.js 18+
+- npm or yarn
 
-1. Clone the repository.
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the development server:
-   ```sh
-   npm run dev
-   ```
+### 1. Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+*The API will run at http://localhost:5000*
 
-The application will be available at `http://localhost:8080` (or the port specified by Vite).
+### 2. Frontend Setup
+```bash
+npm install
+npm run dev
+```
+*The dashboard will be available at http://localhost:8080*
 
 ## 🧪 Simulation Scenarios
+Explore the AI logic by switching between user profiles:
+- **User A (High Spender)**: Average ₹14.2k. Try ₹50,000 (Risky) vs ₹500 (Safe).
+- **User B (Daily Spender)**: Average ₹1.5k. Try ₹10,000 (Blocked) vs ₹200 (Safe).
 
-Explore the AI logic by switching between users:
+## 📊 Visual Walkthrough
+![Verification Recording](file:///C:/Users/Prisha/.gemini/antigravity/brain/76997403-fbc6-45ad-aec2-a44b360cbcfb/verify_guardian_pay_ui_1775587841887.webp)
 
-- **User A (High Spender):** Try sending ₹50,000 (Risky) vs ₹800 (Safe).
-- **User B (Daily Spender):** Try sending ₹10,000 (Risky) vs ₹500 (Safe).
+## 🛠️ Project Structure
+```text
+├── backend/            # Flask API & GNN Implementation
+│   ├── app.py          # Main API controller
+│   ├── gnn_model.py    # GCN Architecture
+│   └── graph_builder.py # Data -> Graph Logic
+├── src/                # React Source Code
+│   ├── api/            # Local/Remote Fraud Engine
+│   ├── components/     # Reusable UI Blocks
+│   └── features/       # Core Logic (Payment, Monitoring)
+├── data/               # Transaction Datasets (CSV)
+└── models/             # Trained GNN Models (.pth)
+```
 
-Observe how the **Risk Meter** and **SHAP Charts** react to different amounts and transaction types.
+## 📜 Documentation
+For theoretical details, refer to the `IEEE_Documentation.md` file located in the root directory.
+
+---
+Developed for **Final Year Project: Advanced Financial Fraud Detection**.
