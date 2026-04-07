@@ -1,0 +1,41 @@
+Total rows for User B: 672
+Rows with valid amount: 672
+Sample raw dates:
+299    01-09-2025
+300    01-09-2025
+301    02-09-2025
+302    02-09-2025
+303    02-09-2025
+304    02-09-2025
+305    02-09-2025
+306    02-09-2025
+307    02-09-2025
+308    03-09-2025
+309    03-09-2025
+310    03-09-2025
+311    03-09-2025
+312    03-09-2025
+313    03-09-2025
+314    04-09-2025
+315    04-09-2025
+316    04-09-2025
+317    05-09-2025
+318    05-09-2025
+Name: date, dtype: object
+Total dropped dates: 8
+Sample dropped date values:
+[nan 'Statement Summary : 01-09-2025  To  28-02-2026'
+ 'Brought Forward (₹)' '940.00CR'
+ 'Please do not share your ATM, Debit/Credit Card number, PIN (Personal Identification number), OTP (One-Time Password), Username or Password with \nanyone via email, SMS, phone call, or any other medium. Bank never asks for such information.'
+ 'If your account is operated by a Power of Attorney holder, please review the transactions with extra care.'
+ 'This is a computer generated statement and does not require a signature.']
+Total valid dates: 664
+Mean: 366.4322289156627, Std: 819.5528366016138
+Spikes (> 5000):
+           date  ...    z_score
+556  24-10-2025  ...  11.754663
+557  24-10-2025  ...  11.754663
+872  06-02-2026  ...   6.873953
+873  06-02-2026  ...   6.873953
+
+[4 rows x 3 columns]
