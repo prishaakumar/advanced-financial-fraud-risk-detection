@@ -17,9 +17,10 @@ except Exception as e:
 app = Flask(__name__)
 CORS(app)
 
-# Paths
-DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
-MODEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "models", "gnn_model.pth")
+# Paths - Robust Absolute Pathing
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "..", "data")
+MODEL_FILE = os.path.join(BASE_DIR, "..", "models", "gnn_model.pth")
 USER_TXN_FILE = os.path.join(DATA_DIR, "user_transactions.csv")
 
 # Global variables for model and data

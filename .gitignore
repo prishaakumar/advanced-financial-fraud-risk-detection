@@ -48,14 +48,15 @@ wheels/
 .installed.cfg
 *.egg
 
-# Data & Models
+# Data & Models (Model included for inference)
 models/*.pth
+!models/gnn_model.pth
 data/*.csv
 !data/user_transactions.csv
 !data/upi_transactions_2024.csv
 
-# Project Documentation
-IEEE_Documentation.md
+# Project Documentation (Included)
+!IEEE_Documentation.md
 
 # System Generated
 .system_generated/
