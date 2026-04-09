@@ -17,11 +17,11 @@ except Exception as e:
 app = Flask(__name__)
 CORS(app)
 
-# Paths - Robust Absolute Pathing
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "..", "data")
-MODEL_FILE = os.path.join(BASE_DIR, "..", "models", "gnn_model.pth")
-USER_TXN_FILE = os.path.join(DATA_DIR, "user_transactions.csv")
+# Paths - Robust Absolute Pathing (Normalized)
+BASE_DIR = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "data"))
+MODEL_FILE = os.path.normpath(os.path.join(BASE_DIR, "..", "models", "gnn_model.pth"))
+USER_TXN_FILE = os.path.normpath(os.path.join(DATA_DIR, "user_transactions.csv"))
 
 # Global variables for model and data
 builder = GraphBuilder() if TORCH_AVAILABLE else None
@@ -248,4 +248,4 @@ def get_transactions(user_id):
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=False)
