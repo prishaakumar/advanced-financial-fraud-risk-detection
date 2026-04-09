@@ -147,10 +147,16 @@ export async function detectFraud(tx: Transaction): Promise<FraudResult> {
     requiresVerification,
     featureImportance,
     reasons: reasons.length > 0 ? reasons : ['Transaction matches normal patterns'],
-    // Include extra fields if available from API (optional integration)
-    ...(apiResult && { 
+    // Include extra fields if available from API, otherwise use mock history for demo
+    ...(apiResult ? { 
        historicalTransactions: apiResult.historical_transactions,
        newTransaction: apiResult.new_transaction
+    } : {
+       historicalTransactions: Array.from({ length: 9 }).map((_, i) => ({
+         amount: 500 + Math.random() * 5000,
+         date: `T-${9-i}`
+       })),
+       newTransaction: tx.amount
     })
   } as any;
 

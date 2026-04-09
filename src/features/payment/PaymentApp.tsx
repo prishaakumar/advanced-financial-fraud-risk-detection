@@ -351,48 +351,54 @@ function ResultCard({ result, onReset }: { result: FraudResult; onReset: () => v
   const Icon = isApproved ? CheckCircle : result.riskLevel === 'MEDIUM' ? AlertTriangle : XCircle;
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Main Result Card */}
       <div
-        className={`rounded-2xl p-6 text-center ${isApproved ? 'glass-card-elevated glow-green' : 'glass-card-elevated glow-red'
+        className={`rounded-2xl p-8 text-center bg-card border border-border shadow-elevated ${isApproved ? 'shadow-glow-green/20' : 'shadow-glow-red/20'
           }`}
       >
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', damping: 10 }}>
-          <Icon
-            className={`mx-auto mb-3 h-14 w-14 ${isApproved ? 'text-success' : 'text-destructive'}`}
-          />
+          <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full ${isApproved ? 'bg-success/10' : 'bg-destructive/10'}`}>
+             <Icon
+               className={`h-10 w-10 ${isApproved ? 'text-success' : 'text-destructive'}`}
+             />
+          </div>
         </motion.div>
-        <h2 className={`text-xl font-bold ${isApproved ? 'text-success' : 'text-destructive'}`}>
+        
+        <h2 className={`text-2xl font-bold ${isApproved ? 'text-success' : 'text-destructive'}`}>
           {isApproved ? 'Payment Approved' : 'Transaction Blocked'}
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {isApproved ? 'Transaction completed successfully' : `Fraud probability: ${(result.probability * 100).toFixed(1)}%`}
+        <p className="mt-1.5 text-sm text-muted-foreground font-medium">
+          {isApproved ? 'Transaction completed successfully' : `Risk Score: ${(result.probability * 100).toFixed(1)}%`}
         </p>
-        <div className="mt-4 rounded-xl bg-secondary p-3 text-xs text-muted-foreground">
-          <div className="flex justify-between">
-            <span>Transaction ID</span>
-            <span className="font-mono font-medium text-foreground">{result.transaction.id}</span>
+
+        <div className="mt-8 space-y-3.5 border-t border-border/50 pt-6">
+          <div className="flex justify-between items-center">
+            <span className="text-xs font-medium text-muted-foreground">Transaction ID</span>
+            <span className="font-mono text-xs font-bold text-foreground">{result.transaction.id}</span>
           </div>
-          <div className="mt-2 flex justify-between">
-            <span>Amount</span>
-            <span className="font-medium text-foreground">₹{result.transaction.amount.toLocaleString()}</span>
+          <div className="flex justify-between items-center">
+            <span className="text-xs font-medium text-muted-foreground">Amount</span>
+            <span className="text-sm font-bold text-foreground">₹{result.transaction.amount.toLocaleString()}</span>
           </div>
-          <div className="mt-2 flex justify-between">
-            <span>Risk Level</span>
-            <span className={`font-medium ${result.riskLevel === 'LOW' ? 'text-success' : result.riskLevel === 'MEDIUM' ? 'text-warning' : 'text-destructive'
+          <div className="flex justify-between items-center">
+            <span className="text-xs font-medium text-muted-foreground">Risk Level</span>
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${result.riskLevel === 'LOW' ? 'bg-success/10 text-success' : result.riskLevel === 'MEDIUM' ? 'bg-warning/10 text-warning' : 'bg-destructive/10 text-destructive'
               }`}>{result.riskLevel}</span>
           </div>
         </div>
 
-        {!isApproved && (
-          <div className="mt-3 rounded-xl bg-destructive/10 p-3 text-left">
-            <p className="text-xs font-medium text-destructive mb-1">Reasons for blocking:</p>
+        {!isApproved && result.reasons.length > 0 && (
+          <div className="mt-6 rounded-xl bg-destructive/5 p-4 text-left border border-destructive/10">
+            <p className="text-[11px] font-bold text-destructive uppercase tracking-wider mb-2">Security Reasons:</p>
             {result.reasons.map((r, i) => (
-              <p key={i} className="text-xs text-destructive/80">• {r}</p>
+              <p key={i} className="text-xs text-destructive/80 leading-relaxed">• {r}</p>
             ))}
           </div>
         )}
       </div>
 
+      {/* Spending Spike Analysis Card */}
       {result.historicalTransactions && result.newTransaction && (
         <SpikeGraph 
           historicalData={result.historicalTransactions} 
@@ -400,11 +406,12 @@ function ResultCard({ result, onReset }: { result: FraudResult; onReset: () => v
         />
       )}
 
+      {/* XAI / SHAP Features if Blocked */}
       {!isApproved && <SHAPChart features={result.featureImportance} />}
 
       <button
         onClick={onReset}
-        className="w-full rounded-xl border border-border bg-card py-3 font-medium text-foreground hover:bg-accent transition-colors"
+        className="w-full rounded-2xl border border-border bg-card py-4 text-sm font-semibold text-foreground hover:bg-accent hover:border-accent transition-all shadow-sm active:scale-[0.98]"
       >
         New Transaction
       </button>
