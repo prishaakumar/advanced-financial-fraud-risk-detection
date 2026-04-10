@@ -2,8 +2,6 @@
 
 [**🌐 Live Demo**](http://13.201.13.33:8080/)
 
-![GuardianPay Dashboard](file:///C:/Users/Prisha/.gemini/antigravity/brain/76997403-fbc6-45ad-aec2-a44b360cbcfb/.system_generated/click_feedback/click_feedback_1775587863329.png)
-
 ## 📋 Abstract
 As the volume of digital transactions (UPI) grows, traditional rule-based fraud detection systems struggle to keep up with complex, evolving patterns. **Advanced Model Financial Fraud Detection** is a real-time system that leverages **Graph Neural Networks (GNN)** and **Behavioral AI** to identify fraudulent activities with a target accuracy of 94%. By modeling transactions as a dynamic graph, the system captures non-linear relationships and network-level anomalies that traditional models miss.
 
